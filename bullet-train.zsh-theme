@@ -414,6 +414,15 @@ prompt_custom() {
   [[ -n "${custom_msg}" ]] && prompt_segment $BULLETTRAIN_CUSTOM_BG $BULLETTRAIN_CUSTOM_FG "${custom_msg}"
 }
 
+# Heroku
+prompt_heroku() {
+  count=`ls -1 Procfile 2>/dev/null | wc -l`
+  if [ $count != "       0" ]
+  then 
+    prompt_segment magenta white `cat Procfile | sed 's/\:.*$//'`
+  fi
+}
+
 # Git
 prompt_git() {
   if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" == "1" ]]; then
